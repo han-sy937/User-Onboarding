@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function Form(props) {
 
-    const { values, submit, inputChange, checkboxChange, disabled, errors } = props
+    const { values, submit, inputChange, checkboxChange, errors,} = props
 
     const onSubmit = evt => {
-        evt.preveDefault()
+        evt.preventDefault()
         submit()
     }
 
@@ -27,7 +27,7 @@ export default function Form(props) {
 
             <label>Name&nbsp;
                 <input 
-                    value={values.name}
+                    value={values.first_name}
                     onChange={onInputChange}
                     name='name'
                     type='text'
@@ -50,7 +50,7 @@ export default function Form(props) {
                     value={values.password}
                     onChange={onInputChange}
                     name='password'
-                    type='text'
+                    type='password'
                 />
             </label>
 
@@ -58,13 +58,17 @@ export default function Form(props) {
                 <input 
                     type='checkbox'
                     name='terms'
-                    checked={values.checked}
+                    checked={values.checked === true}
                     onChange={onCheckboxChange}
                 />
             </label>
 
-            <button disabled={disabled}>Sumbit</button>
+            <button disabled={!values.name || !values.email || !values.password || !values.terms}>Sumbit</button>
+
 
         </form>
+        
+      
+       
     )
 }

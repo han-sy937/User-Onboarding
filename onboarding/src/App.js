@@ -7,14 +7,14 @@ import * as yup from 'yup'
 import './App.css';
 
 const initialFormValues = {
-  name: '',
+  first_name: '',
   email: '',
   password: '',
   terms: '',
 }
 
 const initialFormErrors = {
-  name: '',
+  first_name: '',
   email: '',
   password: '',
   terms: '',
@@ -57,7 +57,7 @@ function App() {
     yup
       .reach(formSchema, name)
       .validate(value)
-      .then(valid => {
+      .then(() => {
         setFormErrors({
           ...formError,
           [name]: '',
@@ -116,16 +116,19 @@ function App() {
       submit={submit}
       disabled={disabled}
       errors={formError}
+      users={users}
       />
 
       {
-        users.data.map(user => {
-          return (
-            <User key={user.id} details={user}/>
-          )
-        }, [])
-
-        
+      users.data && users.data.map(user => {
+        return (
+          <User 
+            key={user.id}
+            details={user}
+          />
+        )
+      })
+      
       }
 
     </div>
